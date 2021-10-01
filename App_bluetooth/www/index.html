@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Serial</title>
+    <link rel="stylesheet" href="css/index.css">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0">
+</head>
+
+<body>
+    <header>
+        <div id="background"></div>
+        <h1>TrackerPrinted</h1>
+        <button id="disconnectButton">disconnect</button>
+    </header>
+    <h2 id="title">Select device: </h2>
+    <div id="ui">
+        <div>
+            <input class="speedButton" type="checkbox" id="3366" name="3366">
+            <label for="3366">Sidéral</label>
+        </div>
+        <div>
+            <input class="speedButton" type="checkbox" id="6732" name="6732">
+            <label for="6732">Sidéral x2</label>
+        </div>
+        <div>
+            <input class="speedButton" type="checkbox" id="3000" name="3000">
+            <label for="3000">Lunaire</label>
+        </div>
+        <div>
+            <input class="speedButton" type="checkbox" id="3400" name="3400">
+            <label for="3400">Solaire</label>
+        </div>
+        <div>
+            <input class="speedButton" type="checkbox" id="0001" name="0001">
+            <label for="0001">D.A.R.V 30sec</label>
+        </div>
+        <div>
+            <input class="speedButton" type="checkbox" id="0002" name="0002">
+            <label for="0002">D.A.R.V 2min</label>
+        </div>
+        <div>
+            <input class="speedButton" type="checkbox" id="0000" name="0000">
+            <label for="0000">Stop</label>
+        </div>
+
+        <br>
+        <div>
+            <input class="poleButton" type="checkbox" id="nord" name="nord">
+            <label for="nord">Nord</label>
+        </div>
+        <div>
+            <input class="poleButton" type="checkbox" id="sud" name="sud">
+            <label for="sud">Sud</label>
+        </div>
+        <button id="send">Confirm</button>
+    </div>
+    <div id="message"></div>
+</body>
+
+</html>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/index.js"></script>

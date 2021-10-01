@@ -1,0 +1,162 @@
+@font-face {
+    font-family: 'nunito';
+    src: url('../font/Nunito-Regular.ttf');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'nunito';
+    src: url('../font/Nunito-Bold.ttf');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'nunito';
+    src: url('../font/Nunito-SemiBold.ttf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: nunito;
+}
+
+html {
+    background-color: #100D28;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+header {
+    height: 16vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header h1 {
+    z-index: 1;
+    color: white;
+    font-size: 40px;
+    font-weight: 700;
+    margin-top: 60px;
+}
+
+h2 {
+    color: #945067;
+    font-size: 25px;
+    font-weight: 700;
+    margin: 50px 0px 30px 30px;
+}
+
+header svg {
+    position: absolute;
+    z-index: -1;
+}
+
+#background {
+    background-image: url("../img/header.png");
+    background-size: cover;
+    height: 25vh;
+    width: 110vw;
+    position: absolute;
+}
+
+#message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow-y: scroll;
+    height: 70vh;
+}
+
+#ui {
+    display: none;
+}
+
+#ui form {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+}
+
+.deviceButton {
+    width: 340px;
+    min-height: 50px!important;
+    background-color: #8F0031;
+    margin: 12px 0 12px 0;
+    border-radius: 15px;
+    border: 0px;
+    font-family: 'nunito';
+    font-size: 18px;
+}
+
+#disconnectButton {
+    display: none;
+    width: 90px;
+    min-height: 34px!important;
+    background-color: #100d28;
+    margin: 10px 0 10px 0;
+    border-radius: 15px;
+    border: 0px;
+    font-family: 'nunito';
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    right: 10px;
+}
+
+.poleButton,
+.speedButton {
+    width: 32px;
+    height: 32px;
+    background-color: #c9c9c9;
+    border-radius: 50%;
+    vertical-align: middle;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    color: #BBBBBB;
+}
+
+.poleButton:checked,
+.speedButton:checked {
+    background-color: #8F0031;
+}
+
+#ui {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#ui div {
+    display: flex;
+    margin: 8px 10px 8px 10px;
+    align-items: center;
+    margin-left: 26px;
+}
+
+#ui div label {
+    color: #BBBBBB;
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+#ui button:last-child {
+    width: 240px;
+    min-height: 50px!important;
+    background-color: #8F0031;
+    border-radius: 15px;
+    border: 0px;
+    font-family: 'nunito';
+    font-size: 18px;
+    align-self: center;
+}

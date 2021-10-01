@@ -1,0 +1,135 @@
+document.addEventListener("deviceready", onDeviceReady, false);
+
+
+function onDeviceReady() {
+    console.log("Running cordova-" + cordova.platformId + "@" + cordova.version);
+    initialize();
+}
+
+let macAddress = "";
+let chars = "";
+let speed = 0;
+let pole = nord;
+
+document.addEventListener('click', function(e) {
+    if (hasClass(e.target, 'deviceButton')) {
+        macAddress = e.target.id;
+        connectDevice();
+        clear();
+        document.getElementById('ui').style.display = "flex";
+        document.getElementById('message').style.display = "none";
+        document.getElementById('title').innerText = "Select options: ";
+    }
+    if (hasClass(e.target, 'speedButton')) {
+        speed = e.target.id;
+        onlyOne(e.target, "speedButton");
+    }
+    if (hasClass(e.target, 'poleButton')) {
+        pole = e.target.id;
+        onlyOne(e.target, "poleButton");
+    }
+});
+document.getElementById('disconnectButton').addEventListener('click', () => {
+    disconnectDevice();
+    listDevice();
+    document.getElementById('title').innerText = "Select device: ";
+})
+
+document.getElementById('send').addEventListener('click', () => {
+    console.log("submit: " + speed + ":" + pole);
+    writeSomethings(speed + ":" + pole);
+})
+
+
+function hasClass(elem, className) {
+    return elem.classList.contains(className);
+}
+
+function onlyOne(checkbox, className) {
+    let checkboxes = document.getElementsByClassName(className);
+    for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i] !== checkbox) checkboxes[i].checked = false
+    }
+}
+
+function initialize() {
+    bluetoothSerial.isEnabled(() => { listDevice() }, () => { notEnabled() });
+};
+
+function notEnabled() {
+    display("Bluetooth is not enabled.");
+}
+
+function listDevice() {
+    bluetoothSerial.list(
+        function(results) {
+            for (let i = 0; i < results.length; i++) {
+                let obj = results[i];
+                console.log(results[i]);
+                display('<button class="deviceButton" id="' + obj.address + '">' + obj.name + '</button>');
+            }
+
+        },
+        function(error) {
+            display(JSON.stringify(error));
+        }
+    );
+}
+
+function writeSomethings(message) {
+    bluetoothSerial.write(message);
+};
+
+function connectDevice() {
+    console.log("connexion");
+    document.getElementById('disconnectButton').style.display = "block";
+    bluetoothSerial.connect(
+        macAddress, // device to connect to
+        openPort(), // start listening if you succeed
+        showError // show the error if you fail
+    );
+}
+
+function disconnectDevice() {
+    document.getElementById('disconnectButton').style.display = "none";
+    bluetoothSerial.disconnect(
+        closePort(), // start listening if you succeed
+        showError // show the error if you fail
+    );
+    document.getElementById('ui').style.display = "none";
+    document.getElementById('message').style.display = "flex";
+}
+
+
+
+function openPort() {
+    bluetoothSerial.subscribe('\n',
+        function(data) {
+            clear();
+            display("reçu: " + data);
+        },
+        showError
+    );
+};
+
+function closePort() {
+    bluetoothSerial.unsubscribe(
+        function() {
+            clear();
+        },
+        showError
+    );
+};
+let showError = function(error) {
+    display("erreur: " + error);
+};
+
+function display(message) {
+    let display = document.getElementById("message");
+    display.insertAdjacentHTML("beforeend", message);
+};
+
+function clear() {
+    let display = document.getElementById("message");
+    display.innerHTML = "";
+};
