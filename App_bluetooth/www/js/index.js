@@ -10,29 +10,34 @@ let macAddress = "";
 let chars = "";
 let speed = 0;
 let pole = nord;
+let speedButtonTouch = false;
+let poleButtonTouch = false;
+let boolEnabledConfirm = false;
 
 document.addEventListener('click', function(e) {
     if (hasClass(e.target, 'deviceButton')) {
         macAddress = e.target.id;
         connectDevice();
-        clear();
-        document.getElementById('ui').style.display = "flex";
-        document.getElementById('message').style.display = "none";
-        document.getElementById('title').innerText = "Select options: ";
     }
     if (hasClass(e.target, 'speedButton')) {
+        speedButtonTouch = true;
+        if (!boolEnabledConfirm) {
+            enabledConfirm();
+        }
         speed = e.target.id;
         onlyOne(e.target, "speedButton");
     }
     if (hasClass(e.target, 'poleButton')) {
+        poleButtonTouch = true;
+        if (!boolEnabledConfirm) {
+            enabledConfirm();
+        }
         pole = e.target.id;
         onlyOne(e.target, "poleButton");
     }
 });
 document.getElementById('disconnectButton').addEventListener('click', () => {
     disconnectDevice();
-    listDevice();
-    document.getElementById('title').innerText = "Select device: ";
 })
 
 document.getElementById('send').addEventListener('click', () => {
@@ -40,6 +45,14 @@ document.getElementById('send').addEventListener('click', () => {
     writeSomethings(speed + ":" + pole);
 })
 
+function enabledConfirm() {
+    if (speedButtonTouch && poleButtonTouch) {
+        console.log("enable");
+        document.getElementById('send').disabled = false;
+        boolEnabledConfirm = true;
+
+    }
+}
 
 function hasClass(elem, className) {
     return elem.classList.contains(className);
@@ -82,25 +95,39 @@ function writeSomethings(message) {
 
 function connectDevice() {
     console.log("connexion");
-    document.getElementById('disconnectButton').style.display = "block";
     bluetoothSerial.connect(
         macAddress, // device to connect to
-        openPort(), // start listening if you succeed
-        showError // show the error if you fail
+        () => { showUi() }, // start listening if you succeed
+        () => { showError() } // show the error if you fail
     );
+
+}
+
+function showUi() {
+    openPort();
+    clear();
+    document.getElementById('disconnectButton').style.display = "block";
+    document.getElementById('ui').style.display = "flex";
+    document.getElementById('message').style.display = "none";
+    document.getElementById('title').innerText = "Select options: ";
+}
+
+function showDevice() {
+    closePort();
+    document.getElementById('ui').style.display = "none";
+    document.getElementById('message').style.display = "flex";
+    document.getElementById('title').innerText = "Select device: ";
+    listDevice();
 }
 
 function disconnectDevice() {
     document.getElementById('disconnectButton').style.display = "none";
     bluetoothSerial.disconnect(
-        closePort(), // start listening if you succeed
-        showError // show the error if you fail
+        () => { showDevice() }, // start listening if you succeed
+        () => { showError() } // show the error if you fail
     );
-    document.getElementById('ui').style.display = "none";
-    document.getElementById('message').style.display = "flex";
+
 }
-
-
 
 function openPort() {
     bluetoothSerial.subscribe('\n',
@@ -108,7 +135,7 @@ function openPort() {
             clear();
             display("reçu: " + data);
         },
-        showError
+        () => { showError() }
     );
 };
 
@@ -117,10 +144,12 @@ function closePort() {
         function() {
             clear();
         },
-        showError
+        () => { showError() }
     );
 };
-let showError = function(error) {
+
+function showError(error) {
+    console.log("erreur" + error);
     display("erreur: " + error);
 };
 
