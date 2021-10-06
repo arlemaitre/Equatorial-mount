@@ -16,11 +16,11 @@ D.A.R.V 120sec ( vitesse sidéral pendant 5 secondes pour avoir le point de dép
 
 - Prochaine version, ajouter prise jack 3.5mm pour controler l'appareil photo ( intervallomètre )
 
-###Sans le bluetooth:
+### Sans le bluetooth:
 La vitesse doit être écrit dans le programme et ensuite le téléverser dans la carte arduino.
 
-#Recommandation: 
+# Recommandation: 
 
-Je vous conseille de calibrer l'horloge de votre Arduino pour gagner en précision en suivant ce tutoriel : [Making Arduino timing more precise](https://lygte-info.dk/project/PrecisionTime%20UK.html)
+Je vous conseille de calibrer l'horloge de votre Arduino pour gagner en précision en suivant ce tutoriel : [Making Arduino timing more precise](https://lygte-info.dk/project/PrecisionTime%20UK.html) ( les liens du logiciel et de la bibliothèque sont en bas de la page )
 
 
