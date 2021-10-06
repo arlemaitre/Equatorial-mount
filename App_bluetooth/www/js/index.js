@@ -9,7 +9,7 @@ function onDeviceReady() {
 let macAddress = "";
 let chars = "";
 let speed = 0;
-let pole = nord;
+let pole = "";
 let speedButtonTouch = false;
 let poleButtonTouch = false;
 let boolEnabledConfirm = false;
