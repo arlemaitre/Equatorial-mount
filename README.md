@@ -4,34 +4,34 @@
 
 Une monture équatorial permet de compenser la rotation de la Terre pour prendre des photos du ciel et éviter les filets d'étoiles.
 
-## [Impression3d:](#impression 3D)
-### [Matériel requis](#Matériel requis)
-### [Adaptation](#adapation)
-### [Montage](#montage)
-### [Recommandation](#recommandation)
+## [Impression3d:](#impression)
+### [Matériel requis](#impression_materiel)
+### [Adaptation](#impression_adapation)
+### [Montage](#impression_montage)
+### [Recommandation](#impression_recommandation)
 
-## [Arduino:](#Arduino)
-### [Matériel requis](#Matériel requis)
-### [Versions](#versions)
-### [Montage](#montage)
-### [Recommandation](#recommandation)
+## [Arduino:](#arduino)
+### [Matériel requis](#arduino_materiel)
+### [Versions](#arduino_versions)
+### [Montage](#arduino_montage)
+### [Recommandation](#arduino_recommandation)
 
-## [Application:](#Application)
-### [Matériel requis](#Matériel requis)
-### [Installation](#installation)
+## [Application:](#application)
+### [Matériel requis](#application_materiel)
+### [Installation](#materiel_installation)
 
 
-## Impression 3D
-### Matériel requis
-### Adaptation
-### Montage
-### Recommandation
+## <a name="impression"></a> Impression 3D
+###<a name="impression_materiel"></a> Matériel requis
+###<a name="impression_adapation"></a> Adaptation
+###<a name="impression_montage"></a> Montage
+###<a name="impression_recommandation"></a> Recommandation
 
-## Arduino 
+##<a name="arduino"></a> Arduino 
 
-### Matériel requis
+###<a name="arduino_materiel"></a> Matériel requis
 
-### Versions
+###<a name="arduino_versions"></a> Versions
 #### Avec le bluetooth: 
 Utilise le module HC-06, permettant d'utiliser l'application mobile pour avoir plus de fonctionnalités :
 - Différentes vitesses ( sidéral, sidéralx2, lunaire, solaire, stop )
@@ -45,12 +45,12 @@ D.A.R.V 120sec ( vitesse sidéral pendant 5 secondes pour avoir le point de dép
 #### Sans le bluetooth:
 La vitesse doit être écrit dans le programme et ensuite le téléverser dans la carte arduino.
 
-### Montage
+###<a name="arduino_montage"></a> Montage
 
-### Recommandation: 
+###<a name="arduino_recommandation"></a> Recommandation: 
 
 Je vous conseille de calibrer l'horloge de votre Arduino pour gagner en précision en suivant ce tutoriel : [Making Arduino timing more precise](https://lygte-info.dk/project/PrecisionTime%20UK.html) ( les liens du logiciel et de la bibliothèque sont en bas de la page )
 
-## Application
-### Matériel requis
-### Installation
+##<a name="application"></a> Application
+###<a name="application_materiel"></a> Matériel requis
+###<a name="application_installation"></a> Installation
