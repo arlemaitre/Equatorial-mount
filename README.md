@@ -4,21 +4,21 @@
 
 Une monture équatorial permet de compenser la rotation de la Terre pour prendre des photos du ciel et éviter les filets d'étoiles.
 
-## [Impression3d:](##impression 3D)
-### [Matériel requis](###Matériel requis)
-### [Adaptation](###adapation)
-### [Montage](###montage)
-### [Recommandation](###recommandation)
+## [Impression3d:](#impression 3D)
+### [Matériel requis](#Matériel requis)
+### [Adaptation](#adapation)
+### [Montage](#montage)
+### [Recommandation](#recommandation)
 
 ## [Arduino:](#Arduino)
-### [Matériel requis](###Matériel requis)
-### [Versions](###versions)
-### [Montage](###montage)
-### [Recommandation](###recommandation)
+### [Matériel requis](#Matériel requis)
+### [Versions](#versions)
+### [Montage](#montage)
+### [Recommandation](#recommandation)
 
-## [Application:](##Application)
-### [Matériel requis](###Matériel requis)
-### [Installation](###installation)
+## [Application:](#Application)
+### [Matériel requis](#Matériel requis)
+### [Installation](#installation)
 
 
 ## Impression 3D
