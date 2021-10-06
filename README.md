@@ -4,19 +4,19 @@
 
 Une monture équatorial permet de compenser la rotation de la Terre pour prendre des photos du ciel et éviter les filets d'étoiles.
 
-## [Impression 3d:](#impression)
+## [Impression 3d:](#impression_title)
 ### [Matériel requis](#impression_materiel)
 ### [Adaptation](#impression_adapation)
 ### [Montage](#impression_montage)
 ### [Recommandation](#impression_recommandation)
 
-## [Arduino:](#arduino)
+## [Arduino:](#arduino_title)
 ### [Matériel requis](#arduino_materiel)
 ### [Versions](#arduino_versions)
 ### [Montage](#arduino_montage)
 ### [Recommandation](#arduino_recommandation)
 
-## [Application:](#application)
+## [Application:](#application_title)
 ### [Matériel requis](#application_materiel)
 ### [Installation](#application_installation)
 
@@ -41,7 +41,7 @@ Une monture équatorial permet de compenser la rotation de la Terre pour prendre
 
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
-## <a name="arduino"></a> Arduino 
+## <a name="arduino_title"></a> Arduino 
 
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
@@ -71,7 +71,7 @@ La vitesse doit être écrit dans le programme et ensuite le téléverser dans l
 
 Je vous conseille de calibrer l'horloge de votre Arduino pour gagner en précision en suivant ce tutoriel : [Making Arduino timing more precise](https://lygte-info.dk/project/PrecisionTime%20UK.html) ( les liens du logiciel et de la bibliothèque sont en bas de la page )
 
-## <a name="application"></a> Application
+## <a name="application_title"></a> Application
 
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
