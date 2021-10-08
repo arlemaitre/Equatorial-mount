@@ -53,6 +53,9 @@ h2 {
     font-size: 25px;
     font-weight: 700;
     margin: 30px 0px 20px 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 header svg {
@@ -180,4 +183,23 @@ header svg {
 
 #ui button:last-child:disabled {
     background-color: #797979;
+}
+
+h2 #data {
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    padding: 2px 10px;
+    font-size: 13px;
+    text-align: center;
+    animation: 2s linear infinite alternate blink;
+}
+
+@keyframes blink {
+    from {
+        background-color: green;
+    }
+    to {
+        background-color: rgb(0 69 0);
+    }
 }

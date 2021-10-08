@@ -109,7 +109,7 @@ function showUi() {
     document.getElementById('disconnectButton').style.display = "block";
     document.getElementById('ui').style.display = "flex";
     document.getElementById('message').style.display = "none";
-    document.getElementById('title').innerText = "Select options: ";
+    document.getElementById('title').innerHTML = "Select options: <span id='data'><span>";
 }
 
 function showDevice() {
@@ -130,14 +130,12 @@ function disconnectDevice() {
 }
 
 function openPort() {
-    bluetoothSerial.subscribe('\n',
-        function(data) {
-            clear();
-            display("reçu: " + data);
-        },
-        () => { showError() }
-    );
-};
+    console.log("suscribe");
+    bluetoothSerial.subscribe('\n', function(data) {
+        console.log("reçu: " + data);
+        document.getElementById('data').innerText = data;
+    });
+}
 
 function closePort() {
     bluetoothSerial.unsubscribe(
@@ -146,7 +144,7 @@ function closePort() {
         },
         () => { showError() }
     );
-};
+}
 
 function showError(error) {
     console.log("erreur" + error);
