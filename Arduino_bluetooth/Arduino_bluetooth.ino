@@ -6,7 +6,7 @@
 
 #define DIR 8
 #define STEP 9
-#define SLEEP 13
+#define SLEEP 6
 
 #include "DRV8825.h"
 #define MODE0 10
@@ -19,13 +19,15 @@ SoftwareSerial HC06(2, 3);
 String messageRecu;
 
 unsigned long currentTime = 0;
-unsigned long previousTimeMotor = 0, previousTimeDARV30 = 0, previousTimeDARV120 = 0, intervall;
+unsigned long previousTimeMotor = 0, previousTimeDARV70 = 0, previousTimeDARV130 = 0, intervall = 0;
+bool desarmMotor = true;
 bool stopMotor = false;
-bool DARV30 = false;
-bool DARV120 = false;
+bool DARV70 = false;
+bool DARV130 = false;
 bool firststepDARV = true;
 void setup() {
   stepper.begin(RPM);
+  stepper.setEnableActiveState(LOW);
   stepper.enable();
   Serial.begin(9600);
   HC06.begin(9600);
@@ -34,14 +36,21 @@ void setup() {
 void loop()
 {
   currentTime = millis();
-  if (stopMotor) {
-    if ((currentTime - previousTimeMotor) > intervall) {
-      Serial.println("step !");
+  if (desarmMotor) {
+    stepper.disable();
+  } else {
+    stepper.enable();
+  }
+  if (!stopMotor) {
+    if ((currentTime - previousTimeMotor) >= intervall) {
+      Serial.println((currentTime - previousTimeMotor));
       previousTimeMotor = currentTime;
       stepper.setMicrostep(32);
       stepper.move(1);
     }
   }
+
+
   if (HC06.available())
   {
     char c = HC06.read();
@@ -54,27 +63,30 @@ void loop()
     Serial.println(delayRcv);
     String pole = getValue(messageRecu, ':', 1);
     Serial.println(pole);
-    stopMotor = true;
-    DARV30 = false;
-    DARV120 = false;
+
+    desarmMotor = false;
+    stopMotor = false;
+    DARV70 = false;
+    DARV130 = false;
     if (pole == "n") {
       switch (delayRcv) {
+        case 1110:
+          HC06.write("Désarmé \n");
+          desarmMotor = true;
+          break;
         case 1111:
-          Serial.println("stop");
           HC06.write("Stop \n");
-          stopMotor = false;
+          stopMotor = true;
           break;
         case 1112:
-           Serial.println("DARV 2min");
           HC06.write("darv 130sec...wait \n");
-          DARV120 = true;
-          previousTimeDARV120 = currentTime;
+          DARV130 = true;
+          previousTimeDARV130 = currentTime;
           break;
         case 1113:
-            Serial.println("DARV 30sec");
           HC06.write("darv 70sec...wait \n");
-          DARV30 = true;
-          previousTimeDARV30 = currentTime;
+          DARV70 = true;
+          previousTimeDARV70 = currentTime;
           break;
         default:
           intervall = delayRcv;
@@ -83,25 +95,20 @@ void loop()
           } else if ( intervall == 1683) {
             HC06.write("Sidéralx2 \n");
           }
-          //  Serial.println(intervall);
           break;
       }
     } else {
       Serial.println("Sud");
       switch (delayRcv) {
         case 1111:
-          //  Serial.println("stop");
-          stopMotor = false;
+          stopMotor = true;
           break;
         case 1112:
-          // Serial.println("DARV 2min");
           break;
         case 1113:
-          // Serial.println("DARV 30sec");
           break;
         default:
           intervall = delayRcv;
-          //  Serial.println(intervall);
           break;
       }
     }
@@ -109,42 +116,34 @@ void loop()
 
   }
 
-  if (DARV30) {
-    if ((currentTime - previousTimeDARV30) > 70000) {
-      //Serial.println("DARV_end");
+  if (DARV70) {
+    if ((currentTime - previousTimeDARV70) >= 70000) {
       HC06.write("Darv70sec finish \n");
-      stopMotor = false;
-      DARV30 = false;
-      firststepDARV = true;
-    } else if ((currentTime - previousTimeDARV30) > 40000) {
-      // Serial.println("DARV_sidéralx2");
       stopMotor = true;
-      intervall = 1683;
-    } else if ((currentTime - previousTimeDARV30) > 10000) {
-      // Serial.println("DARV_stop");
+      DARV70 = false;
+      firststepDARV = true;
+    } else if ((currentTime - previousTimeDARV70) >= 40000) {
       stopMotor = false;
+      intervall = 1683;
+    } else if ((currentTime - previousTimeDARV70) >= 10000) {
+      stopMotor = true;
     } else if (firststepDARV) {
-      // Serial.println("DARV_sidéral");
       intervall = 3366;
       firststepDARV = false;
     }
   }
-  if (DARV120) {
-    if ((currentTime - previousTimeDARV120) > 130000) {
-      // Serial.println("DARV_end");
-           HC06.write("Darv130sec finish \n");
-      stopMotor = false;
-      DARV120 = false;
-      firststepDARV = true;
-    } else if ((currentTime - previousTimeDARV120) > 70000) {
-      // Serial.println("DARV_sidéralx2");
+  if (DARV130) {
+    if ((currentTime - previousTimeDARV130) >= 130000) {
+      HC06.write("Darv130sec finish \n");
       stopMotor = true;
-      intervall = 1683;
-    } else if ((currentTime - previousTimeDARV120) > 10000) {
-      //  Serial.println("DARV_stop");
+      DARV130 = false;
+      firststepDARV = true;
+    } else if ((currentTime - previousTimeDARV130) >= 70000) {
       stopMotor = false;
+      intervall = 1683;
+    } else if ((currentTime - previousTimeDARV130) >= 10000) {
+      stopMotor = true;
     } else if (firststepDARV) {
-      // Serial.println("DARV_sidéral");
       intervall = 3366;
       firststepDARV = false;
     }
