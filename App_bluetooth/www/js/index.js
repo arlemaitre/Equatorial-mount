@@ -17,6 +17,7 @@ let boolEnabledConfirm = false;
 document.addEventListener('click', function(e) {
     if (hasClass(e.target, 'deviceButton')) {
         macAddress = e.target.id;
+        document.getElementById('error').innerHTML = " Try to connect to the device...";
         connectDevice();
     }
     if (hasClass(e.target, 'speedButton')) {
@@ -50,7 +51,6 @@ function enabledConfirm() {
         console.log("enable");
         document.getElementById('send').disabled = false;
         boolEnabledConfirm = true;
-
     }
 }
 
@@ -83,8 +83,8 @@ function listDevice() {
             }
 
         },
-        function(error) {
-            display(JSON.stringify(error));
+        function(e) {
+            display(JSON.stringify(e));
         }
     );
 }
@@ -94,13 +94,19 @@ function writeSomethings(message) {
 };
 
 function connectDevice() {
-    console.log("connexion");
     bluetoothSerial.connect(
         macAddress, // device to connect to
         () => { showUi() }, // start listening if you succeed
-        () => { showError() } // show the error if you fail
+        (e) => {
+            console.log("connect")
+            showError(e)
+            if (e == "Unable to connect to device") {
+                document.getElementById('error').innerHTML = e;
+            } else if (e == "Device connection was lost") {
+                disconnectDevice();
+            }
+        }
     );
-
 }
 
 function showUi() {
@@ -109,14 +115,14 @@ function showUi() {
     document.getElementById('disconnectButton').style.display = "block";
     document.getElementById('ui').style.display = "flex";
     document.getElementById('message').style.display = "none";
-    document.getElementById('title').innerHTML = "Select options: <span id='data'><span>";
+    document.getElementById('title').innerHTML = "Select options: <span id='data'>waiting</span>";
 }
 
 function showDevice() {
     closePort();
     document.getElementById('ui').style.display = "none";
     document.getElementById('message').style.display = "flex";
-    document.getElementById('title').innerText = "Select device: ";
+    document.getElementById('title').innerHTML = "Select device: <span id='error'></span>";
     listDevice();
 }
 
@@ -124,9 +130,8 @@ function disconnectDevice() {
     document.getElementById('disconnectButton').style.display = "none";
     bluetoothSerial.disconnect(
         () => { showDevice() }, // start listening if you succeed
-        () => { showError() } // show the error if you fail
+        (e) => { showError(e) } // show the error if you fail
     );
-
 }
 
 function openPort() {
@@ -142,13 +147,12 @@ function closePort() {
         function() {
             clear();
         },
-        () => { showError() }
+        (e) => { showError(e) }
     );
 }
 
 function showError(error) {
-    console.log("erreur" + error);
-    display("erreur: " + error);
+    console.log("error: " + error);
 };
 
 function display(message) {
